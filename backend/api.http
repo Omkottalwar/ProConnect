@@ -1,0 +1,45 @@
+POST http://localhost:9080/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "omk1234",
+  "password": "mypassword124",
+  "email": "omk2@example.com",
+  "name": "Omk Kottalwar2"
+}
+###
+POST http://localhost:9080/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "omk2@example.com",
+  "password": "mypassword124"
+}
+###
+GET http://localhost:9080/get_user_and_profile
+Content-Type: application/json
+{
+  "token":"0bed3deb3781c74c1cd3bf6b062c9848e017ae96e20c3d9c9bb7e77ac7ec4d8a"
+}
+###
+POST http://localhost:9080/update_profile_data HTTP/1.1
+Content-Type: application/json
+{
+  "token":"e95a891acc5dd36fd1e573f4a5e1da2e18c1cf40f393cd038f692e1edb8b8374",
+    "bio":"I am Om Kottalwar, a software developer.",
+    "currentPost":"New York, USA",  
+    "pastWork":[
+        {
+            "company":"Tech Solutions",
+            "position":"Software Engineer",
+            "years":"2+"
+        }
+    ],
+    "education":[
+        {
+           "school":"State University",
+            "degree":"B.Sc. in Computer Science",
+            "fieldOfStudy":"Computer Science",
+        }
+    ],
+}                                              
