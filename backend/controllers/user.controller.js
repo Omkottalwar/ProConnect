@@ -6,8 +6,6 @@ import crypto from "crypto"
 import PDFDocument from "pdfkit"
 import fs from "fs"
 import ConnectionRequest from "../models/conections.model.js";
-import { Result } from "postcss";
-import Post from "../models/post.model.js"
 const convertUserDataToPDF=(userData)=>{
     const doc=new PDFDocument();
     const outputPath=crypto.randomBytes(32).toString("hex")+".pdf";
