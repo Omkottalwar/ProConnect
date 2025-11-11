@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-  origin: "https://pro-connect-zeta-flame.vercel.app/", // your frontend origin
+  origin: "https://pro-connect-zeta-flame.vercel.app", 
   credentials: true
 }));
 
