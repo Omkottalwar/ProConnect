@@ -63,7 +63,7 @@ useEffect(  ()=>{
              </div>
      </div>
      <div className={styles.profileContainer_details}>
-        <div style={styles.profileContainer__flex}>
+        <div className={styles.profileContainer__flex}>
             <div style={{flex:"0.8"}}>
                 <div style={{display:"flex",width:"fit-content",alignItems:"center",gap:"1.2rem"}}>
                     <h2>{userProfile.userId.name}</h2>
