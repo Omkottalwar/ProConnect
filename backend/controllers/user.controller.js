@@ -205,8 +205,8 @@ export const whatAreMyConnections=async(req,res)=>{
         if(!user){
             return res.status(404).json({message:"User not found"})
         }
-        const connections= await ConnectionRequest.find({connectionId:user._id})
-        .populate("userId","name username email profilePicture")
+        const connections= await ConnectionRequest.find({ $or:[{connectionId:user._id},{userId:user._id}]})
+        .populate("userId","name username email profilePicture").populate("connectionId","name username email profilePicture");
         return res.json(connections)
 
     }catch(error){

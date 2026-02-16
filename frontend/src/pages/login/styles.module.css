@@ -16,6 +16,7 @@
     width: 80vw;
     background-color: white;
     box-shadow: 10px 10px 15px rgb(173,173,173) ;
+    
 }
     .cardContainer__left{
     flex: 0.6;
@@ -58,7 +59,7 @@
 
     }
      .inputRow{
-    width: fit-content;
+    width: 100%;
     display: flex;
     gap: 1.2rem;
 
@@ -83,12 +84,21 @@
     width: 100%;
     border-radius: 10px;
     cursor: pointer;
-    
-
-
-
-
-
+}
+.buttonWithOutline1{
+    padding: 0.8rem 1.3rem;
+    background: rgba(236,236,236);
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: -35px;
+}
+.eyeBall{
+    width: 5%;
+    position: relative;
+    bottom: 52px;
+    font-weight: bold;
+    left: 160px;
 }
 @media only screen and (max-width: 600px){
   .cardContainer{

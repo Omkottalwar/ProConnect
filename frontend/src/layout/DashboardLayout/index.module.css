@@ -1,20 +1,29 @@
 .homeConatiner{
     display: flex;
+    margin-top: 100px;
+    height: 100svh;
+    
 }
-.homeConatiner > div:nth-child(odd){
-    flex: 0.2;
 
-}
-.homeConatiner > div:nth-child(even){
-    flex: 0.6;
 
-}
+
 .homeContainer__leftBar{
     display: flex;
+    flex:0.2;
     flex-direction: column;
     gap: 1.2rem;
     align-items: flex-start;
     border-right: 1px solid rgb(222, 222, 222);
+    position: fixed;
+    overflow: auto;
+    left: 5px;
+    background-color: white;
+    height: 100svh;
+    width: 250px;
+   
+   
+    
+    
 }
 .sideBarOption{
     display: flex;
@@ -40,9 +49,17 @@
 .homecontainer__extraConatiner{
     border-left: 1px solid rgb(222, 222, 222);
     padding-left: 1.2rem;
+    flex: 0.2;
+    position: fixed;
+    right: 100px;
+    height: 100svh;
+    width: 250px;
 }
 .homeContainer__feedConatiner{
     padding-inline: 0.8rem;
+    flex: 0.6;
+    margin-left: 250px;
+    height: 100svh;
 }
 .mobileNavBar{
     position: fixed;
@@ -54,6 +71,7 @@
     justify-content: space-around;
     background: white;
     align-items: center;
+  
 
 
 }
@@ -64,6 +82,7 @@
     cursor: pointer;
 
 }
+
 @media only screen and (max-width: 600px){
     .homecontainer__extraConatiner{
         display: none;
@@ -78,7 +97,13 @@
         display: flex ;
     }
     .homeContainer__feedConatiner{
-        padding-bottom: 10vh;
+        margin-left: 0;
+        flex: 1;
+        margin-top: 120px;
+        padding-bottom: 1560px;
+       
+        
+      
     }
 
 }

@@ -30,7 +30,8 @@ function Discoverpage() {
                 }} key={user._id} className={styles.userCard}>
                   <img className={styles.userCard__image} src={`${BASE_URL}/${user.userId.profilePicture}`} alt={user.username} />
                   <h1>{user.userId.name}</h1>
-                  <p>{user.userId.username}</p>
+                  <p>@{user.userId.username}</p>
+                  
 
 
                 </div>

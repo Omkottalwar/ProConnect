@@ -1,5 +1,11 @@
 .container{
     padding: 1.2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+   
 }
 .navBar{
     display: flex;

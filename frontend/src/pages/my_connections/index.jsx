@@ -7,15 +7,18 @@ import { useSelector } from 'react-redux';
 import styles from "./styles.module.css"
 import { BASE_URL } from '@/config';
 import { useRouter } from 'next/router';
-import { connection } from 'next/server';
+import { getAboutUser } from '@/config/redux/action/authAction';
+import { getAllUsers } from '@/config/redux/action/authAction';
 function MyConnectionsPage() {
   const dispatch=useDispatch();
   const router=useRouter();
   const authState=useSelector((state)=>state.auth)
   useEffect(()=>{
     dispatch(getMyConnectionRequests({token:localStorage.getItem("token")}))
+    dispatch(getAboutUser({token:localStorage.getItem("token")}));
+    dispatch(getAllUsers());
    
-  },[])
+  },[authState.connectionRequest])
   useEffect(()=>{
     if(authState.connectionRequest.length != 0){
       console.log( authState.connectionRequest);
@@ -31,10 +34,18 @@ function MyConnectionsPage() {
             
             
           { authState.connectionRequest.length !=0 && authState.connectionRequest.filter((connection)=>connection.Status_accepted === null).map((user,index)=>{
+            console.log("jje",user.userId._id);
+            console.log("hello",authState.user.userId._id);
+            if(user.userId._id === authState.user.userId._id){
+              return(
+                <></>
+              )
+            }
             return(
+              
              
              <div onClick={()=>{
-              router.push(`/view_profile/${user.userId.username.connectionId}`)
+              router.push(`/view_profile/${user.userId.username}`)
 
              }} className={styles.userCard} key={index}>
               <div style={{display:"flex",alignItems:"center", gap:"1rem"}}>
@@ -48,6 +59,7 @@ function MyConnectionsPage() {
                 <button onClick={(e)=>{
                   e.stopPropagation();
                   dispatch(AcceptConnection({token:localStorage.getItem("token"),connectionId:user._id,action:"accept"}))
+          
                 }} className={styles.connectedButton}>Accept</button>
               </div>
               
@@ -55,7 +67,9 @@ function MyConnectionsPage() {
             )
           })}
           <h4>My Network</h4>
-          { authState.connectionRequest.filter((connection)=>connection.Status_accepted != null).map((user,index)=>{
+          
+          { authState.connectionRequest.filter((connection)=>connection.Status_accepted == true).map((user,index)=>{
+            {if(authState.user.userId.name == user.connectionId.name ){
             return(
              <div onClick={()=>{
               router.push(`/view_profile/${user.userId.username}`)
@@ -68,12 +82,48 @@ function MyConnectionsPage() {
                 <div className={styles.userInfo}>
                   <h3>{user.userId.name}</h3>
                   <p>{user.userId.username}</p>
+                  
+                
+
+                 
+                  
                 </div>
                
               </div>
               
-             </div>)
-          })}
+             </div>
+             
+             
+            )
+             
+                
+            }else{
+              return(
+                <div onClick={()=>{
+              router.push(`/view_profile/${user.connectionId.username}`)
+
+             }} className={styles.userCard} key={index}>
+              <div style={{display:"flex",alignItems:"center", gap:"1rem"}}>
+                <div className={styles.profilePicture}>
+                  <img src={`${BASE_URL}/${user.connectionId.profilePicture}`}></img>
+                </div>
+                <div className={styles.userInfo}>
+                  <h3>{user.connectionId.name}</h3>
+                  <p>{user.connectionId.username}</p>
+                </div>
+               
+              </div>
+              
+             </div>
+              )
+            }
+          }
+            
+             
+          })
+        
+          
+          }
         
           </div>
           

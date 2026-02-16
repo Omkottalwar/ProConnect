@@ -18,6 +18,7 @@ function Dashboard() {
    
     const authState=useSelector((state)=>state.auth)
     const postState=useSelector((state)=>state.posts)
+    console.log(postState.posts)
  
     useEffect(()=>{
         if(authState.isTokenThere){
@@ -47,6 +48,7 @@ function Dashboard() {
     return ( 
         <UserLayout>
           <DashboardLayout>
+          
             <div className={styles.scrollComponent}>
               <div className={styles.wrapper}>
               <div className={styles.createPostContainer}>
@@ -68,7 +70,7 @@ function Dashboard() {
                 {postContent.length>0 &&
                  <div onClick={()=>{
                   handleUpload()
-                 }} className={styles.uploadButton}>Upload File</div>
+                 }} className={styles.uploadButton}>Post</div>
                 }
                
 
@@ -77,11 +79,16 @@ function Dashboard() {
                 {postState.posts.map((post)=>{
                   return (
                     <div key={post._id} className={styles.singleCard}>
+                    
                       <div className={styles.singleCard__profileContainer}>
-                        <img className={styles.singleCard__profileImage} src={`${BASE_URL}/${post.userId.profilePicture}`}></img>
+                        <img onClick={()=>{
+                        router.push(`view_profile/${post.userId.username}`)
+                      }} className={styles.singleCard__profileImage} src={`${BASE_URL}/${post.userId.profilePicture}`}></img>
                      <div>
                       <div style={{display:"flex",justifyContent:"space-between",gap:"1.2rem"}}>
-                      <p style={{fontWeight:"bold"}}>{post.userId.name}</p>
+                      <p onClick={()=>{
+                        router.push(`view_profile/${post.userId.username}`)
+                      }} style={{fontWeight:"bold"}}>{post.userId.name}</p>
                       {post.userId._id===authState.user.userId._id &&
                        <div onClick={async ()=>{
                         await dispatch(deletePost({post_id:post._id}))
@@ -168,12 +175,16 @@ function Dashboard() {
                 <div onClick={(e)=>{
                   e.stopPropagation();
                 }} className={styles.allCommentsContainer}>
+                   <div className={styles.commentsList}>
+
                   {postState.comments.length===0 && <h2>No Comments</h2>}
                
-                  {postState.comments.lenght!==0 &&
-                  <div>
+                  {postState.comments.length!==0 &&
+                  <div >
                     {postState.comments.map((postComment)=>{
                       return(
+                        <div >
+                        
                       <div className={styles.singleComment} key={postComment._id}>
                         <div className={styles.singleComment__profileContainer}>
                           <img src={`${BASE_URL}/${postComment.userId.profilePicture}` } alt=''></img>
@@ -184,6 +195,7 @@ function Dashboard() {
                             </div>
                         </div>
                         <p>{postComment.body}</p>
+                      </div>
                       </div>
                       )
                     })}
@@ -200,7 +212,7 @@ function Dashboard() {
                       <p>Comment</p>
                     </div>
                   </div>
-              
+              </div>
 
                 </div>
 

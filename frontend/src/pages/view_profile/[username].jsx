@@ -12,6 +12,7 @@ import { getAllPosts } from '@/config/redux/action/postAction';
 import { getConnectionRequests, getMyConnectionRequests, sendConnectionRequest } from '@/config/redux/action/authAction';
 import { combineSlices, current } from '@reduxjs/toolkit';
 function ViewProfilePage({userProfile}) {
+    console.log("heeloo",userProfile)
     const router =useRouter();
     const postReducer=useSelector((state)=>state.posts)
     const dispatch=useDispatch();
@@ -63,7 +64,7 @@ useEffect(  ()=>{
              </div>
      </div>
      <div className={styles.profileContainer_details}>
-        <div style={styles.profileContainer__flex}>
+        <div className={styles.profileContainer__flex}>
             <div style={{flex:"0.8"}}>
                 <div style={{display:"flex",width:"fit-content",alignItems:"center",gap:"1.2rem"}}>
                     <h2>{userProfile.userId.name}</h2>
@@ -75,6 +76,7 @@ useEffect(  ()=>{
                 :
                 <button onClick={()=>{
                     dispatch(sendConnectionRequest( {token: localStorage.getItem("token"),user_id:userProfile.userId._id}));
+                    
                 }} className={styles.connectBtn}>Connect</button>
                 }
                 <div onClick={ async ()=>{
