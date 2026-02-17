@@ -3,6 +3,8 @@ import register, { acceptConnectionRequest, downloadProfile, getAllUsersProfiles
 import multer from "multer";
 import { uploadProfilePicture } from "../controllers/user.controller.js";
 import { deletePost } from "../controllers/post.controller.js";
+import { forgotPassword, resetPassword } from "../controllers/user.controller.js";
+
 
 const router=Router();
 const storage=multer.diskStorage({
@@ -32,5 +34,7 @@ router.route("/user/user_connection_request").get(whatAreMyConnections);
 router.route("/user/accept_connection_request").post(acceptConnectionRequest);
 router.route("/delete_post").post(deletePost);
 router.route("/user/get_profile_based_on_username").get(getUserProfileAndUserBasedOnUsername);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 
 export default router;

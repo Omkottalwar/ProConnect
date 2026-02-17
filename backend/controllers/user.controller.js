@@ -6,6 +6,8 @@ import crypto from "crypto"
 import PDFDocument from "pdfkit"
 import fs from "fs"
 import ConnectionRequest from "../models/conections.model.js";
+import { Resend } from "resend";
+const resend = new Resend("re_LrX1mTj8_BuRS7HPVeoEjQNTgCpuDj3L8");
 const convertUserDataToPDF=(userData)=>{
     const doc=new PDFDocument();
     const outputPath=crypto.randomBytes(32).toString("hex")+".pdf";
@@ -252,3 +254,60 @@ export const getUserProfileAndUserBasedOnUsername=async(req,res)=>{
     }
 
 }
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user)
+      return res.json({ message: "If user exists, email sent" });
+
+    const token = crypto.randomBytes(32).toString("hex");
+
+    user.resetPasswordToken = token;
+    user.resetPasswordExpiry = Date.now() + 15 * 60 * 1000;
+    await user.save();
+
+    const resetLink = `http://localhost:3000/ResetPassword/${token}`;
+
+    await resend.emails.send({
+      from: "Support <onboarding@resend.dev>",
+      to: email,
+      subject: "Reset Your Password",
+      html: `
+        <h2>Password Reset</h2>
+        <p>Click the link below:</p>
+        <a href="${resetLink}">${resetLink}</a>
+        <p>Valid for 15 minutes</p>
+      `,
+    });
+
+    res.json({ message: "Reset link sent to email" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+export const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+    console.log(token,password)
+
+    const user = await User.findOne({
+      resetPasswordToken:token
+});
+
+    if (!user)
+      return res.status(400).json({ message: "Invalid or expired token" });
+
+    user.password = await bcrypt.hash(password, 10);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpiry = undefined;
+
+    await user.save();
+
+    res.json({ message: "Password reset successful" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

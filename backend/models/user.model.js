@@ -34,7 +34,14 @@ const UserSchema=mongoose.Schema({
     token:{
         type:String,
         default:''
-    }
+    },
+   resetPasswordToken:{ 
+        type:String,
+   },    
+  resetPasswordExpiry:{ 
+    type:Date
+
+  }
 });
 const User= mongoose.model("User",UserSchema)
 export default User;
