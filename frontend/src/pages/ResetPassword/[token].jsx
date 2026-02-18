@@ -23,7 +23,7 @@ export default function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post(
-      `http://localhost:9080/reset-password/${token}`,
+      `https://proconnect-a390.onrender.com/reset-password/${token}`,
       { password }
     );
     setMessage(res.data.message);
