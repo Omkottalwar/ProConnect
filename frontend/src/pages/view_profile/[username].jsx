@@ -1,11 +1,10 @@
 import { BASE_URL, clientServer } from '@/config';
 import UserLayout from '@/layout/UserLayout';
-import DashboardLayout from '@/layout/DashboardLayout';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import DashboardLayout from '@/layout/DashboardLayout';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from "./styles.module.css";
-
 import { getAllPosts } from '@/config/redux/action/postAction';
 import {
   getConnectionRequests,
@@ -23,10 +22,9 @@ function ViewProfilePage({ userProfile }) {
   const [userPosts, setUserPosts] = useState([]);
   const [isCurrentUserInConnections, setIsCurrentUserInConnections] = useState(false);
   const [isConnectionNull, setIsConnectionNull] = useState(true);
+  const [connectLoading, setConnectLoading] = useState(false); // 🔥 loading state
 
-  const intervalRef = useRef(null);
-
-  /* ---------------- LOAD POSTS ---------------- */
+  // Filter posts
   useEffect(() => {
     const post = postReducer.posts.filter(
       (post) => post.userId.username === router.query.username
@@ -34,76 +32,50 @@ function ViewProfilePage({ userProfile }) {
     setUserPosts(post);
   }, [postReducer.posts, router.query.username]);
 
-  /* ---------------- FETCH INITIAL DATA ---------------- */
+  // Check connection status
+  useEffect(() => {
+    if (
+      authState.connections.some(
+        (user) => user.connectionId._id === userProfile.userId._id
+      )
+    ) {
+      setIsCurrentUserInConnections(true);
+      if (
+        authState.connections.find(
+          (user) => user.connectionId._id === userProfile.userId._id
+        ).Status_accepted
+      ) {
+        setIsConnectionNull(false);
+      }
+    }
+
+    if (
+      authState.connectionRequest.some(
+        (user) => user.userId._id === userProfile.userId._id
+      )
+    ) {
+      setIsCurrentUserInConnections(true);
+      if (
+        authState.connectionRequest.find(
+          (user) => user.userId._id === userProfile.userId._id
+        ).Status_accepted
+      ) {
+        setIsConnectionNull(false);
+      }
+    }
+  }, [authState.connections, authState.connectionRequest, userProfile.userId._id]);
+
+  // Initial data load
   useEffect(() => {
     dispatch(getAllPosts());
     dispatch(getConnectionRequests({ token: localStorage.getItem("token") }));
     dispatch(getMyConnectionRequests({ token: localStorage.getItem("token") }));
   }, [dispatch]);
 
-  /* ---------------- START POLLING ---------------- */
-  const startPolling = () => {
-    if (intervalRef.current) return;
-
-    intervalRef.current = setInterval(() => {
-      dispatch(getConnectionRequests({ token: localStorage.getItem("token") }));
-      dispatch(getMyConnectionRequests({ token: localStorage.getItem("token") }));
-    }, 3000);
-  };
-
-  /* ---------------- CHECK CONNECTION STATUS ---------------- */
-  useEffect(() => {
-    if (!userProfile?.userId?._id) return;
-
-    const connected =
-      authState.connections.some(
-        (u) =>
-          u.connectionId._id === userProfile.userId._id &&
-          u.Status_accepted === true
-      ) ||
-      authState.connectionRequest.some(
-        (u) =>
-          u.userId._id === userProfile.userId._id &&
-          u.Status_accepted === true
-      );
-
-    const pending =
-      authState.connections.some(
-        (u) => u.connectionId._id === userProfile.userId._id
-      ) ||
-      authState.connectionRequest.some(
-        (u) => u.userId._id === userProfile.userId._id
-      );
-
-    if (pending) {
-      setIsCurrentUserInConnections(true);
-    }
-
-    if (connected) {
-      setIsConnectionNull(false);
-
-      // stop polling
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    }
-  }, [authState.connections, authState.connectionRequest, userProfile]);
-
-  /* ---------------- CLEANUP ---------------- */
-  useEffect(() => {
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
-
   return (
     <UserLayout>
       <DashboardLayout>
-
-        {/* COVER IMAGE */}
+        {/* Cover Image */}
         <div className={styles.container}>
           <div className={styles.backDropContainer}>
             <img
@@ -113,17 +85,16 @@ function ViewProfilePage({ userProfile }) {
           </div>
         </div>
 
-        {/* PROFILE DETAILS */}
+        {/* Profile Details */}
         <div className={styles.profileContainer_details}>
           <div className={styles.profileContainer__flex}>
-
-            {/* LEFT */}
             <div style={{ flex: "0.8" }}>
-              <div style={{ display: "flex", gap: "1.2rem" }}>
+              <div style={{ display: "flex", gap: "1.2rem", alignItems: "center" }}>
                 <h2>{userProfile.userId.name}</h2>
                 <p style={{ color: "grey" }}>@{userProfile.userId.username}</p>
               </div>
 
+              {/* Buttons */}
               <div style={{ display: "flex", gap: "1rem", marginBlock: "1rem" }}>
                 {isCurrentUserInConnections ? (
                   <button className={styles.connectedButton}>
@@ -131,22 +102,29 @@ function ViewProfilePage({ userProfile }) {
                   </button>
                 ) : (
                   <button
-                    className={styles.connectBtn}
-                    onClick={() => {
-                      dispatch(
-                        sendConnectionRequest({
-                          token: localStorage.getItem("token"),
-                          user_id: userProfile.userId._id
-                        })
-                      );
-                      startPolling();
+                    className={`${styles.connectBtn} ${
+                      connectLoading ? styles.loadingBtn : ""
+                    }`}
+                    disabled={connectLoading}
+                    onClick={async () => {
+                      try {
+                        setConnectLoading(true);
+                        await dispatch(
+                          sendConnectionRequest({
+                            token: localStorage.getItem("token"),
+                            user_id: userProfile.userId._id,
+                          })
+                        );
+                      } finally {
+                        setConnectLoading(false);
+                      }
                     }}
                   >
-                    Connect
+                    {connectLoading ? "Connecting..." : "Connect"}
                   </button>
                 )}
 
-                {/* RESUME DOWNLOAD */}
+                {/* Resume Download */}
                 <div
                   style={{ cursor: "pointer" }}
                   onClick={async () => {
@@ -156,43 +134,60 @@ function ViewProfilePage({ userProfile }) {
                     window.open(`${BASE_URL}/${response.data.message}`, "_blank");
                   }}
                 >
-                  <svg style={{width:"1.2em"}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-</svg>
+                  <svg
+                    style={{ width: "1.2em" }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                    />
+                  </svg>
                 </div>
               </div>
 
               <p>{userProfile.bio}</p>
             </div>
 
-            {/* RIGHT */}
+            {/* Recent Activity */}
             <div style={{ flex: "0.2" }}>
               <h3>Recent Activity</h3>
               {userPosts.map((post) => (
                 <div key={post._id} className={styles.postCard}>
-                  {post.media && (
-                    <img src={`${BASE_URL}/${post.media}`} alt="" />
-                  )}
-                  <p>{post.body}</p>
+                  <div className={styles.card}></div>
+                  <div className={styles.card_profileContainer}>
+                    {post.media ? (
+                      <img src={`${BASE_URL}/${post.media}`} alt="" />
+                    ) : (
+                      <div style={{ width: "3.4rem", height: "3.4rem" }} />
+                    )}
+                    <p>{post.body}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* WORK HISTORY */}
+        {/* Work History */}
         <div className={styles.workHistory}>
           <h4>Work History</h4>
           <div className={styles.workHistoryConatiner}>
             {userProfile.pastWork.map((work, index) => (
               <div key={index} className={styles.workHistoryCard}>
-                <p><b>{work.company}</b> — {work.position}</p>
+                <p style={{ fontWeight: "bold" }}>
+                  {work.company} - {work.position}
+                </p>
                 <p>{work.years}</p>
               </div>
             ))}
           </div>
         </div>
-
       </DashboardLayout>
     </UserLayout>
   );
@@ -200,14 +195,15 @@ function ViewProfilePage({ userProfile }) {
 
 export default ViewProfilePage;
 
-/* ---------------- SERVER SIDE ---------------- */
 export async function getServerSideProps(context) {
   const request = await clientServer.get(
     "/user/get_profile_based_on_username",
-    { params: { username: context.query.username } }
+    {
+      params: { username: context.query.username },
+    }
   );
 
   return {
-    props: { userProfile: request.data.profile }
+    props: { userProfile: request.data.profile },
   };
 }
