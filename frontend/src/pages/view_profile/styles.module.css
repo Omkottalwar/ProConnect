@@ -15,6 +15,10 @@
     border-radius:20px ;
 
 }  
+.loadingBtn {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 .backDropContainer > img{
     width: 10em;
     height: 10em;
