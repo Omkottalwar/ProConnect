@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-  origin: "http://localhost:3000", 
+  origin: "https://pro-connect-zeta-flame.vercel.app", 
   credentials: true
 }));
 
