@@ -9,7 +9,7 @@ export default function ForgotPassword() {
     const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post(
-      "http://localhost:9080/forgot-password",
+      "https://proconnect-a390.onrender.com/forgot-password",
       { email }
     );
     setMessage(res.data.message);
