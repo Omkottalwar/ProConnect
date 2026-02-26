@@ -10,20 +10,20 @@ function Navbar() {
     return ( 
         <div className={styles.container}>
             <nav className={styles.navBar}>
-                <h1 style={{cursor:"pointer"}} onClick={()=>{
+                <h1 style={{cursor:"pointer", fontSize: 20, fontWeight: 600, color: "#ffffff"}} onClick={()=>{
                     router.push("/")
                 }}>Pro Connect</h1>
             <div className={styles.navBarOptionConatiner}>
               {authState.profileFetched &&<div style={{display:"flex",gap:"1.2rem"}}>
-                <p>Hey,{authState.user.userId.name}</p>
+                <p className={styles.welcomeMessage}>Hey,{authState.user.userId.name}</p>
                 <p onClick={()=>{
                     router.push("/profile")
-                }} style={{cursor:"pointer",fontWeight:"bold"}}>Profile</p>
+                }} className={styles.profileButton}>Profile</p>
                 <p onClick={()=>{
                     localStorage.removeItem("token");
                     router.push("/login")
                     dispatch(reset())
-                }} style={{cursor:"pointer",fontWeight:"bold"}}>Logout</p>
+                }} className={styles.logoutButton}>Logout</p>
                 </div>}
               {!authState.profileFetched &&
                  <div  className={styles.buttonJoin} onClick={()=>{

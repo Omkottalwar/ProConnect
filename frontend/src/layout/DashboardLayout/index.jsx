@@ -15,7 +15,7 @@ function DashboardLayout({children}) {
         })
     return (  
         <div>
-            <div className="conatiner">
+            <div className={styles.container}>
                 <div className={styles.homeConatiner}>
                     <div className={styles.homeContainer__leftBar}>
                         <div onClick={()=>{
@@ -51,12 +51,35 @@ function DashboardLayout({children}) {
                     {children}
 
                 </div>
-                <div className={styles.homecontainer__extraConatiner}>
-                  <h3>Top Profile</h3>
-                  {authState.all_profiles_fetched && authState.all_users.map((profile) => (
-  <p key={profile._id}>{profile.userId?.name}</p>
-))}
-                </div>
+              <div className={styles.homecontainer__extraConatiner}>
+  <h3
+    style={{
+      borderBottom: "2px solid white",
+      paddingBottom: "0.7rem",
+      paddingLeft: "3rem",
+      margin: "0",
+    }}
+  >
+    Top Profile
+  </h3>
+
+  &nbsp;
+
+  {authState.all_profiles_fetched &&
+    authState.all_users
+      .slice(0, 5)   // ✅ ONLY FIRST 5 USERS
+      .map((profile) => (
+        <p onClick={()=>{
+          router.push(`/view_profile/${profile.userId.username}`)
+        }}
+          key={profile._id}
+          className={styles.topProfileItem}
+          style={{ marginLeft: "30px", marginBottom: "0.5rem", padding: "0.3rem" }}
+        >
+          {profile.userId?.name}
+        </p>
+      ))}
+</div>
                 </div>
             
             </div>

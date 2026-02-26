@@ -31,7 +31,7 @@ function Dashboard() {
         
                 }
 
-    },[authState.isTokenThere])
+    },[authState.isTokenThere,postState.posts])
     const [postContent,setPostContent]=useState("");
     const [fileContent,setFileContent]=useState(null);
     const [commentText,setCommentText]=useState("");
@@ -48,6 +48,7 @@ function Dashboard() {
     return ( 
         <UserLayout>
           <DashboardLayout>
+            <div className={styles.container}>
           
             <div className={styles.scrollComponent}>
               <div className={styles.wrapper}>
@@ -70,20 +71,23 @@ function Dashboard() {
                 {postContent.length>0 &&
                  <div onClick={()=>{
                   handleUpload()
+                  dispatch(getAllPosts())
                  }} className={styles.uploadButton}>Post</div>
                 }
                
 
               </div>
+               <hr style={{width:"100%"}}></hr>
               <div className={styles.postContainer}>
                 {postState.posts.map((post)=>{
                   return (
                     <div key={post._id} className={styles.singleCard}>
                     
                       <div className={styles.singleCard__profileContainer}>
+                       
                         <img onClick={()=>{
                         router.push(`view_profile/${post.userId.username}`)
-                      }} className={styles.singleCard__profileImage} src={`${BASE_URL}/${post.userId.profilePicture}`}></img>
+                      }}  className={styles.singleCard__profileImage} src={`${BASE_URL}/${post.userId.profilePicture}`}></img>
                      <div>
                       <div style={{display:"flex",justifyContent:"space-between",gap:"1.2rem"}}>
                       <p onClick={()=>{
@@ -108,7 +112,7 @@ function Dashboard() {
                        <p style={{color:"grey"}}>{post.userId.username}</p>
                        <p style={{paddingTop:"1.3rem"}}>{post.body}</p>
                        <div className={styles.singleCard_image}>
-                       {post.media !== "" ? <img src={`${BASE_URL}/${post.media}`}></img> : <></>} 
+                       {post.media !== "" ? <img style={{marginTop:"15px"}} src={`${BASE_URL}/${post.media}`}></img> : <></>} 
                        </div>
                        <div className={styles.optionsContainer}>
                         <div onClick={async ()=>{
@@ -146,7 +150,6 @@ function Dashboard() {
 </svg>
 
                           
-
                           </div>
   
 
@@ -158,15 +161,18 @@ function Dashboard() {
                       </div>
                      
                     </div>
+                    
                   )
 
                 })}
 
               </div>
+              
 
 
             </div>
             </div>
+            
             {
               postState.postId !=="" && 
               <div onClick={()=>{
@@ -208,6 +214,7 @@ function Dashboard() {
                     <div onClick={async()=>{
                     await  dispatch(postComment({post_id:postState.postId,body:commentText}))
                     await  dispatch(getAllComments({post_id:postState.postId}))
+                      setCommentText("");
                     }} className={styles.postCommentContainer_commentBtn}>
                       <p>Comment</p>
                     </div>
@@ -220,6 +227,7 @@ function Dashboard() {
             
             }
 
+            </div>
             
           </DashboardLayout>
         </UserLayout>

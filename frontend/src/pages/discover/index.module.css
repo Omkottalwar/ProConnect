@@ -1,25 +1,160 @@
-.userCard{
-    gap: 1.2rem;
-    padding: 1.3rem;
-    align-items: center;
-    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.1);
-    cursor: pointer;
- height: fit-content;
-}
-.userCard p{
-    color: rgb(104, 104, 104);
-    opacity: 0.6;
-}
-.userCard:hover{
-    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.2); }
-.userCard__image{
-    width: 10%;
-    border-radius: 50%;
-}
-.allUserProfile{
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    max-width: 80%;
+.userCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 
+  padding: 16px 20px;
+  height: auto;
+
+  background: #ffffff;
+  border-radius: 18px;
+
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.userCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.10);
+}
+.h1 {
+  max-width: 900px;
+  margin: 20px auto;
+  padding-left: 24px;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.userCard p {
+  font-size: 13px;
+  color: #64748B;
+}
+
+.userCard__image {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.allUserProfile {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.searchInput {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.searchButton {
+  padding: 10px 20px;
+  background-color: #3B82F6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100px;
+}
+.searchButton:hover {
+  background-color: #2563EB;
+}
+.searchContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  gap: 0px;
+}
+.suggestionBox {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.suggestionItem {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestionItem:hover {
+  background: #222;
+}
+
+.suggestionItem img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.suggestionItem p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.suggestionItem span {
+  font-size: 11px;
+  color: gray;
+}
+
+.noResult {
+  padding: 10px;
+  font-size: 13px;
+  color: gray;
+}
+.resultHeading {
+  margin: 1rem 0;
+}
+
+.resultList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.resultItem {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.resultItem:hover {
+  background: #f0f0f0;
+}
+
+.resultItem img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+@media only screen and (max-width: 600px) {
+
+  .allUserProfile {
+    padding: 16px;
+    padding-bottom: 80px;
+  }
+
+  .h1 {
+    margin-left: 0;
+    padding-left: 16px;
+  }
 }

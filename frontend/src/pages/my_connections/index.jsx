@@ -1,136 +1,163 @@
-import { AcceptConnection, getMyConnectionRequests } from '@/config/redux/action/authAction';
+import {
+  AcceptConnection,
+  getMyConnectionRequests,
+  getAboutUser,
+  getAllUsers,
+} from '@/config/redux/action/authAction';
+
 import DashboardLayout from '@/layout/DashboardLayout';
 import UserLayout from '@/layout/UserLayout';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import styles from "./styles.module.css"
+import { useDispatch, useSelector } from 'react-redux';
+import styles from "./styles.module.css";
 import { BASE_URL } from '@/config';
 import { useRouter } from 'next/router';
-import { getAboutUser } from '@/config/redux/action/authAction';
-import { getAllUsers } from '@/config/redux/action/authAction';
+
 function MyConnectionsPage() {
-  const dispatch=useDispatch();
-  const router=useRouter();
-  const authState=useSelector((state)=>state.auth)
-  useEffect(()=>{
-    dispatch(getMyConnectionRequests({token:localStorage.getItem("token")}))
-    dispatch(getAboutUser({token:localStorage.getItem("token")}));
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const authState = useSelector((state) => state.auth);
+
+  /* ---------------- API CALLS (RUN ONCE) ---------------- */
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    dispatch(getMyConnectionRequests({ token }));
+    dispatch(getAboutUser({ token }));
     dispatch(getAllUsers());
-   
-  },[authState.connectionRequest])
-  useEffect(()=>{
-    if(authState.connectionRequest.length != 0){
-      console.log( authState.connectionRequest);
-    }
-  },[authState.connectionRequest])
-    return ( 
-        <UserLayout>
+  }, [authState.connections, authState.connectionRequest]);
+
+  /* ---------------- SAFETY GUARDS ---------------- */
+  const connectionRequests = Array.isArray(authState?.connectionRequest)
+    ? authState.connectionRequest
+    : [];
+
+  const currentUserId = authState?.user?.userId?._id;
+
+  if (!currentUserId) {
+    return (
+      <UserLayout>
         <DashboardLayout>
-          <h4>My Connections </h4>
-
-          <div style={{display:"flex",flexDirection:"column",gap:"1.7rem"}} className={styles.myConnections}>
-            {authState.connectionRequest.length==0 && <h2>No Connection Requests Pending</h2>}
-            
-            
-          { authState.connectionRequest.length !=0 && authState.connectionRequest.filter((connection)=>connection.Status_accepted === null).map((user,index)=>{
-            console.log("jje",user.userId._id);
-            console.log("hello",authState.user.userId._id);
-            if(user.userId._id === authState.user.userId._id){
-              return(
-                <></>
-              )
-            }
-            return(
-              
-             
-             <div onClick={()=>{
-              router.push(`/view_profile/${user.userId.username}`)
-
-             }} className={styles.userCard} key={index}>
-              <div style={{display:"flex",alignItems:"center", gap:"1rem"}}>
-                <div className={styles.profilePicture}>
-                  <img src={`${BASE_URL}/${user.userId.profilePicture}`}></img>
-                </div>
-                <div className={styles.userInfo}>
-                  <h3>{user.userId.name}</h3>
-                  <p>{user.userId.username}</p>
-                </div>
-                <button onClick={(e)=>{
-                  e.stopPropagation();
-                  dispatch(AcceptConnection({token:localStorage.getItem("token"),connectionId:user._id,action:"accept"}))
-          
-                }} className={styles.connectedButton}>Accept</button>
-              </div>
-              
-             </div>
-            )
-          })}
-          <h4>My Network</h4>
-          
-          { authState.connectionRequest.filter((connection)=>connection.Status_accepted == true).map((user,index)=>{
-            {if(authState.user.userId.name == user.connectionId.name ){
-            return(
-             <div onClick={()=>{
-              router.push(`/view_profile/${user.userId.username}`)
-
-             }} className={styles.userCard} key={index}>
-              <div style={{display:"flex",alignItems:"center", gap:"1rem"}}>
-                <div className={styles.profilePicture}>
-                  <img src={`${BASE_URL}/${user.userId.profilePicture}`}></img>
-                </div>
-                <div className={styles.userInfo}>
-                  <h3>{user.userId.name}</h3>
-                  <p>{user.userId.username}</p>
-                  
-                
-
-                 
-                  
-                </div>
-               
-              </div>
-              
-             </div>
-             
-             
-            )
-             
-                
-            }else{
-              return(
-                <div onClick={()=>{
-              router.push(`/view_profile/${user.connectionId.username}`)
-
-             }} className={styles.userCard} key={index}>
-              <div style={{display:"flex",alignItems:"center", gap:"1rem"}}>
-                <div className={styles.profilePicture}>
-                  <img src={`${BASE_URL}/${user.connectionId.profilePicture}`}></img>
-                </div>
-                <div className={styles.userInfo}>
-                  <h3>{user.connectionId.name}</h3>
-                  <p>{user.connectionId.username}</p>
-                </div>
-               
-              </div>
-              
-             </div>
-              )
-            }
-          }
-            
-             
-          })
-        
-          
-          }
-        
-          </div>
-          
-      
+          <p style={{ padding: "2rem" }}>Loading connections...</p>
         </DashboardLayout>
       </UserLayout>
-     );
+    );
+  }
+
+  /* ---------------- PENDING REQUESTS ---------------- */
+  const pendingRequests = connectionRequests.filter(
+    (c) => c?.Status_accepted === null && c?.userId?._id !== currentUserId
+  );
+
+  /* ---------------- ACCEPTED CONNECTIONS ---------------- */
+  const acceptedConnections = connectionRequests.filter(
+    (c) => c?.Status_accepted === true
+  );
+
+  /* ---------------- JSX ---------------- */
+  return (
+    <UserLayout>
+      <DashboardLayout>
+
+        <h4 className={styles.myConnectionsHeading}>My Connections</h4>
+
+        <div
+          className={styles.myConnections}
+          style={{ display: "flex", flexDirection: "column", gap: "1.7rem" }}
+        >
+          {/* ---------------- NO PENDING ---------------- */}
+          {pendingRequests.length === 0 && (
+            <h2 className={styles.myConnectionsHeading}>No Connection Requests Pending</h2>
+          )}
+
+          {/* ---------------- PENDING REQUESTS ---------------- */}
+          {pendingRequests.map((user, index) => (
+            <div
+              key={index}
+              className={styles.userCard}
+              onClick={() =>
+                router.push(`/view_profile/${user.userId.username}`)
+              }
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                <div className={styles.profilePicture}>
+                  <img
+                    src={`${BASE_URL}/${user.userId.profilePicture}`}
+                    alt={user.userId.name}
+                  />
+                </div>
+
+                <div className={styles.userInfo}>
+                  <h3>{user.userId.name}</h3>
+                  <p>{user.userId.username}</p>
+                </div>
+
+                <button
+                  className={styles.connectedButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(
+                      AcceptConnection({
+                        token: localStorage.getItem("token"),
+                        connectionId: user._id,
+                        action: "accept",
+                      })
+                    )
+                    dispatch(getMyConnectionRequests({ token: localStorage.getItem("token") }));
+                    ;
+                  }}
+                >
+                  Accept
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* ---------------- MY NETWORK ---------------- */}
+          <h4 className={styles.myConnectionsHeading}>My Network</h4>
+
+          {acceptedConnections.map((connection, index) => {
+            const isCurrentUser =
+              connection?.userId?._id === currentUserId;
+
+            const otherUser = isCurrentUser
+              ? connection.connectionId
+              : connection.userId;
+
+            if (!otherUser) return null;
+
+            return (
+              <div
+                key={index}
+                className={styles.userCard}
+                onClick={() =>
+                  router.push(`/view_profile/${otherUser.username}`)
+                }
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                  <div className={styles.profilePicture}>
+                    <img
+                      src={`${BASE_URL}/${otherUser.profilePicture}`}
+                      alt={otherUser.name}
+                    />
+                  </div>
+
+                  <div className={styles.userInfo}>
+                    <h3>{otherUser.name}</h3>
+                    <p>{otherUser.username}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+      </DashboardLayout>
+    </UserLayout>
+  );
 }
 
 export default MyConnectionsPage;

@@ -10,6 +10,9 @@ import styles from "./styles.module.css"
 import { useDispatch } from 'react-redux';
 import { getAllPosts } from '@/config/redux/action/postAction';
 import { getConnectionRequests, getMyConnectionRequests, sendConnectionRequest } from '@/config/redux/action/authAction';
+import { getAboutUser } from '@/config/redux/action/authAction';
+import { getAllUsers } from '@/config/redux/action/authAction';     
+
 import { combineSlices, current } from '@reduxjs/toolkit';
 function ViewProfilePage({userProfile}) {
     console.log("heeloo",userProfile)
@@ -20,13 +23,18 @@ function ViewProfilePage({userProfile}) {
     const [userPosts,setUserPosts]=useState([]);
     const [isCurrentUserInConnections,setIsCurrentUserInConnections]=useState(false);
     const [isConnectionNull,setIsConnectionNull]=useState(true);
+
   useEffect(()=>{
     let post =postReducer.posts.filter((post)=>{
         return post.userId.username===router.query.username
     })
     setUserPosts(post);
   },[postReducer.posts])
+  
 useEffect(()=>{
+     dispatch(getAllPosts())
+    dispatch(getAboutUser({token:localStorage.getItem("token")}))
+    
     console.log(authState.connections,userProfile.userId._id)
     if(authState.connections.some(user=>user.connectionId._id===userProfile.userId._id)){
         setIsCurrentUserInConnections(true);
@@ -48,10 +56,12 @@ useEffect(  ()=>{
      dispatch(getAllPosts());
      dispatch(getConnectionRequests({token:localStorage.getItem("token")}))
     dispatch(getMyConnectionRequests({token:localStorage.getItem("token")}) )
-},[])
+},[authState.connections,authState.connectionRequest])
 
     useEffect(()=>{
         console.log("view profile")
+        dispatch(getAllUsers())
+        dispatch(getAboutUser({token:localStorage.getItem("token")}))
     },[])
 
 
@@ -72,10 +82,15 @@ useEffect(  ()=>{
                 </div>
                 <div style={{display:"flex" , alignItems:"center",gap:"1rem",marginBlock:"1rem"}}>
                 {isCurrentUserInConnections? 
-                <button className={styles.connectedButton}>{ isConnectionNull? "Pending" : "Connected"}</button>
+                <button style={{width:"fit-content",padding:"0.5rem"}} className={styles.connectedButton}>{ isConnectionNull? <p style={{display:"flex",alignItems:"center",gap:"0.5rem",width:'fit-content'}}>Pending<svg style={{width:"20px"}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>
+</p> : "Connected"}</button>
                 :
                 <button onClick={()=>{
                     dispatch(sendConnectionRequest( {token: localStorage.getItem("token"),user_id:userProfile.userId._id}));
+                     dispatch(getConnectionRequests({token:localStorage.getItem("token")}))
+    dispatch(getMyConnectionRequests({token:localStorage.getItem("token")}) )
                     
                 }} className={styles.connectBtn}>Connect</button>
                 }
@@ -97,7 +112,7 @@ useEffect(  ()=>{
       
             </div>
             <div style={{flex:"0.2"}}>
-                <h3>Recent Activity</h3>
+                <h3 className={styles.recentActivityHeading}>Recent Activity</h3>
                 {userPosts.map((post)=>{
                     return(
                         <div key={post._id} className={styles.postCard}>
@@ -145,4 +160,4 @@ export async function getServerSideProps(context){
     const resposne= await request.data;
     console.log(resposne);
     return{props: {userProfile:request.data.profile}}
-} 
+}  

@@ -1,232 +1,250 @@
-.container{
-    padding: 1.3rem;
-    background: rgb(255, 253, 253);
-    display: flex;
-    flex-direction: column;
-    gap: 1.3rem;
+/* =======================
+   PAGE WRAPPER
+======================= */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem 1rem;
+    background: #fff;
+    border-radius: 20px;
+    
 }
-.backDropContainer{
+
+/* =======================
+   COVER IMAGE
+======================= */
+.backDropContainer {
     width: 100%;
     height: 30vh;
-    background: url('https://images.pexels.com/photos/32357295/pexels-photo-32357295.jpeg?_gl=1*1jqzagz*_ga*MjAzNTQzODc3MC4xNzYyMTExMzMy*_ga_8JE65Q40S6*czE3NjIxMTEzMzIkbzEkZzEkdDE3NjIxMTEzNTEkajQxJGwwJGgw');
+    background: url('https://images.pexels.com/photos/32357295/pexels-photo-32357295.jpeg');
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    border-radius:20px ;
+    border-radius: 20px;
+}
 
-}  
-.backDropContainer > img{
-    width: 10em;
-    height: 10em;
+
+/* PROFILE IMAGE */
+.backDropContainer > img {
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
-    bottom: -30%;
-    left: 8%;
-    text-align: center;
+    bottom: -65px;
+    left: 40px;
+    border: 5px solid #fff;
+    z-index: 2;
 }
-.profileContainer_details{
-    padding-top: 4.6rem;
-}
-.car{
-display: flex;
-align-items: center;
-gap: 1.4rem;
-}
-.card_profileContainer{
-    display: flex;
-}
-.card_profileContainer > img{
-    width: 3.4rem;
-    height: auto;
-    height: 3.4rem;
-    object-fit: cover;
-}
-.connectBtn{
-    padding-inline: 0.8rem;
-    padding-block: 0.5rem;
-    background-color: #007bff;
+
+/* PROFILE IMAGE EDIT OVERLAY */
+.backDrop_overlay {
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    bottom: -65px;
+    left: 40px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 3;
+}
+
+.backDrop_overlay:hover {
+    opacity: 1;
+}
+
+/* =======================
+   MAIN PROFILE SECTION
+======================= */
+.profileContainer_details {
+    max-width: 1100px;
+    margin: 100px auto 0;
+    justify-content: center;
+   
+    
+}
+
+/* FORCE TWO COLUMN LAYOUT */
+.profileContainer_details > div {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+}
+
+/* =======================
+   LEFT : BIO SECTION
+======================= */
+.profileContainer_details > div > div:first-child {
+    flex: 0.7;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+/* NAME */
+.nameEdit {
+    font-size: 1.9rem;
+    font-weight: 600;
+    border: none;
     outline: none;
+}
+
+/* BIO */
+.profileContainer_details textarea {
+    font-size: 1rem;
+    line-height: 1.6;
+    border: none;
+    outline: none;
+    resize: none;
+    color: #555;
+    width: 100%;
+}
+
+/* EDIT BUTTON */
+.editBtn {
+    margin-top: 0.5rem;
+    padding: 0.55rem 1.2rem;
+    background: #007bff;
+    color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-   
+    width: fit-content;
 }
-  
-.connectedButton{
-    padding-inline: 0.8rem;
-    padding-block: 0.5rem;
-    background-color: white;
-    color: #007bff;
-    outline: #007bff;
-    border: 1px solid #007bff;
-    border-radius: 10px;
-    cursor: pointer;
-   
+
+/* =======================
+   RIGHT : RECENT ACTIVITY
+======================= */
+.profileContainer_details > div > div:last-child {
+    flex: 0.3;
+    background: #f9fafb;
+    padding: 1rem;
+    border-radius: 14px;
+    max-height: 420px;
+    overflow-y: auto;
 }
-.workHistoryConatiner{
+
+/* ACTIVITY CARD */
+.postCard {
+    background: white;
+    padding: 0.8rem;
+    border-radius: 12px;
+    margin-bottom: 0.8rem;
+}
+
+/* ACTIVITY ROW */
+.card_profileContainer {
     display: flex;
-    gap: 1.5rem;
-    width: 100%;
-    padding-top: 1.5rem;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.card_profileContainer > img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* =======================
+   WORK HISTORY (BOTTOM)
+======================= */
+.workHistory {
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+}
+
+.workHistory h4 {
+    margin-bottom: 1rem;
+}
+
+/* WORK CARDS */
+.workHistoryConatiner {
+    display: flex;
+    gap: 1.2rem;
     flex-wrap: wrap;
-    flex-direction: column;
-
-  
-
 }
 
-.workHistoryCard{
-    min-width: fit-content;
-    padding-inline: 2.5rem;
-    padding-block: 1rem;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px rgb(173, 173, 173);
-    width: fit-content;
-
-}
-.backDrop_overlay{
-   
-    
-    border-radius: 50%;
-    position: absolute;
-    bottom: -30%;
-    left: 8%;
-    text-align: center;
-    z-index: 4;
-    transition: all 0.4s;
-    cursor: pointer;
-    color: white;
-    opacity: 0.0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 10em;
-    height: 10em;
-    border-radius: 50%;
-    object-fit: cover;
-    position: absolute;
-    bottom: -30%;
-    left: 8%;
-    text-align: center;
-    
-
-}
-.backDrop_overlay:hover{
-    background: rgba(0, 0, 0);
-    opacity: 0.4;
-}
-.profileContainer_details input{
-    outline: none;
-    border-style: none;
-    padding-inline: 10px;
-    padding-block: 9px;
-    width:fit-content; ;
-
-
-    
-}
-.nameEdit{
-    font-size: 1.5rem;
-    font-weight: bold;
-
-}
-.connectionButton{
-    padding-inline: 0.8rem;
-    padding-block: 0.5rem;
-    background-color: #007bff;
-    color: white;
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 30px;
-    width: fit-content;
-
-}
-.profileContainer_details textarea{
-    outline: none;
-    border-style: none;
-    padding-inline: 10px;
-    padding-block: 9px;
-    font-family: "Poppins" !important;
-    font-size: 1.1rem;
-
-    
-}
-.addWorkBtn{
-    width: fit-content;
-    padding-inline: 1.3rem;
+/* SINGLE WORK CARD */
+.workHistoryCard {
     background: white;
-    border: 1px dotted silver;
-    border-radius: 10px;
-    padding-block: 1.2rem;
-    cursor: pointer;
-    
-   
-
-
+    padding: 1.2rem 1.6rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
-.commentsContainer{
+
+/* ADD WORK */
+.addWorkBtn {
+    padding: 1rem 1.4rem;
+    border: 1px dashed silver;
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* =======================
+   MODAL
+======================= */
+.commentsContainer {
     position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 5;
+    inset: 0;
     background: rgba(0,0,0,0.7);
-    overflow: hidden;
+    display: flex;
     justify-content: center;
-    display: flex;
     align-items: center;
-
+    z-index: 1000;
 }
-.allCommentsContainer{
-    width: 40vw;
-    height: fit-content;
+
+.allCommentsContainer {
+    width: 400px;
     background: white;
-    border-radius: 10px;
-    position: relative;
-    padding: 1.4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    
-
-
-
+    border-radius: 14px;
+    padding: 1.5rem;
 }
-.inputField{
-    padding-inline: 1.3rem;
-    padding-block: 0.6rem;
-    outline: none;
-    border-radius: 10px;
-    border:1px solid silver;
-    width: 100%;
-    display: flex;
-    gap: 1.2rem;
-     
 
- }
- .addWorkButton{
-    padding-inline: 0.8rem;
-    padding-block: 0.5rem;
-    background-color: #007bff;
-    color: white;
+/* INPUT */
+.inputField {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid silver;
     outline: none;
-    border: none;
+}
+
+/* ADD WORK BUTTON */
+.addWorkButton {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: #007bff;
+    color: white;
     border-radius: 10px;
     cursor: pointer;
     width: fit-content;
-
- }
- .card_profileContainer{
-    display: flex;
 }
-.card_profileContainer > img{
-    width: 3.4rem;
-    height: auto;
-    height: 3.4rem;
-    object-fit: cover;
+
+/* =======================
+   MOBILE
+======================= */
+@media (max-width: 768px) {
+    .profileContainer_details > div {
+        flex-direction: column;
+    }
+
+    .profileContainer_details > div > div:last-child {
+        max-height: none;
+    }
+
+    .backDropContainer > img,
+    .backDrop_overlay {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }

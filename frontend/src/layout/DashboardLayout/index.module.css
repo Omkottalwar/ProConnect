@@ -1,109 +1,254 @@
-.homeConatiner{
+/* =======================
+   MAIN PAGE LAYOUT
+======================= */
+.homeConatiner {
+  display: flex;
+  padding-top: 64px; /* navbar height */
+  min-height: 100svh;
+  background: #F8FAFC;
+}
+.topProfileItem {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.topProfileItem:hover {
+  background: #0A2540;
+  color: white;
+}
+/* =======================
+   LEFT SIDEBAR
+======================= */
+.homeContainer__leftBar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+
+  width: 240px;
+  height: calc(100svh - 64px);
+
+  background-color: #0A2540;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 12px;
+
+  border-right: 1px solid rgba(255,255,255,0.08);
+  overflow-y: auto;
+}
+
+.sideBarOption {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.sideBarOption:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateX(4px);
+}
+
+.sideBarOption svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* =======================
+   RIGHT SIDEBAR
+======================= */
+.homecontainer__extraConatiner {
+  position: fixed;
+  top: 64px;
+  right: 0;
+
+  width: 240px;
+  height: calc(100svh - 64px);
+
+  background-color: #0A2540;
+  color: white;
+
+  border-left: 1px solid rgba(255,255,255,0.08);
+  padding: 16px 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* =======================
+   FEED CONTAINER
+======================= */
+.homeContainer__feedConatiner {
+  margin: 0 auto;
+  padding: 24px;
+
+  flex: 1;
+  max-width: 720px;
+}
+
+/* =======================
+   CREATE POST CARD
+======================= */
+.createPostContainer {
+  background: white;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.createPostContainer img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.createPostContainer input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #334155;
+}
+
+/* =======================
+   POST CARD
+======================= */
+.postCard {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+/* =======================
+   POST HEADER ROW
+======================= */
+.card_profileContainer {
+  display: flex;
+  align-items: flex-start;   /* 🔥 FIX: avatar stays at top */
+  gap: 12px;
+}
+
+/* PROFILE IMAGE */
+.card_profileContainer > img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  flex-shrink: 0;            /* 🔥 prevents center shrinking */
+  margin-top: 2px;
+}
+
+/* POST TEXT AREA */
+.card_profileContainer p {
+  margin: 0;
+  line-height: 1.5;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+/* =======================
+   POST IMAGE
+======================= */
+.postCard img.postMedia {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 12px;
+  object-fit: cover;
+}
+
+/* =======================
+   POST ACTIONS
+======================= */
+.postActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 10px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.postActions div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 13px;
+  color: #475569;
+  cursor: pointer;
+}
+
+.postActions div:hover {
+  color: #0A2540;
+}
+
+/* =======================
+   MOBILE NAVBAR
+======================= */
+.mobileNavBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 56px;
+
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  z-index: 1000;
+}
+
+.mobileNavBar svg {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+@media only screen and (max-width: 600px) {
+
+  .homeContainer__leftBar,
+  .homecontainer__extraConatiner {
+    display: none;
+  }
+
+  .homeContainer__feedConatiner {
+    padding: 16px;
+    padding-bottom: 72px;
+    width: 100%;
+  }
+
+  .mobileNavBar {
     display: flex;
-    margin-top: 100px;
-    height: 100svh;
-    
-}
-
-
-
-.homeContainer__leftBar{
-    display: flex;
-    flex:0.2;
-    flex-direction: column;
-    gap: 1.2rem;
-    align-items: flex-start;
-    border-right: 1px solid rgb(222, 222, 222);
-    position: fixed;
-    overflow: auto;
-    left: 5px;
-    background-color: white;
-    height: 100svh;
-    width: 250px;
-   
-   
-    
-    
-}
-.sideBarOption{
-    display: flex;
-    align-items: center;
-    font-size: 1.4rem;
-    gap: 1.3rem;
-    width: 80%;
-    max-width: 80%;
-    margin: 0 auto;
-    cursor: pointer;
-    transition: all 0.2s;;
-
-}
-.sideBarOption:hover{
-    transform: scale(1.04);
-
-}
-.sideBarOption > svg{
-    height: 1.4em;
-    min-width: fit-content;
-
-}
-.homecontainer__extraConatiner{
-    border-left: 1px solid rgb(222, 222, 222);
-    padding-left: 1.2rem;
-    flex: 0.2;
-    position: fixed;
-    right: 100px;
-    height: 100svh;
-    width: 250px;
-}
-.homeContainer__feedConatiner{
-    padding-inline: 0.8rem;
-    flex: 0.6;
-    margin-left: 250px;
-    height: 100svh;
-}
-.mobileNavBar{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 8vh;
-    display: none ;
-    justify-content: space-around;
-    background: white;
-    align-items: center;
-  
-
-
-}
-
-.mobileNavBar svg{
-    height: 2.2em;
-    width: 2.2em;
-    cursor: pointer;
-
-}
-
-@media only screen and (max-width: 600px){
-    .homecontainer__extraConatiner{
-        display: none;
-    }
-    .homeConatiner{
-        display: block;
-    }
-    .homeContainer__leftBar{
-        display: none;
-    }
-    .mobileNavBar{
-        display: flex ;
-    }
-    .homeContainer__feedConatiner{
-        margin-left: 0;
-        flex: 1;
-        margin-top: 120px;
-        padding-bottom: 1560px;
-       
-        
-      
-    }
-
+  }
 }

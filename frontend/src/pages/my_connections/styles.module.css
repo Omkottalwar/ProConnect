@@ -1,34 +1,84 @@
-.userCard{
-    display: flex;
+.userCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+
+  padding: 16px 20px;
+  background: #ffffff;
+
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.userCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.10);
+}
+.profilePicture > img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.myConnections {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+
+  max-width: 720px;
+  margin: 0 auto 20px;
+
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.myConnectionsHeading {
+  max-width: 720px;
+  margin: 16px auto;
+  padding-left: 16px;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+.connectedButton {
+  padding: 6px 14px;
+
+  background: #ffffff;
+  color: #4F46E5;
+
+  border: 1px solid #4F46E5;
+  border-radius: 20px;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.connectedButton:hover {
+  background: #4F46E5;
+  color: #ffffff;
+}
+@media only screen and (max-width: 600px) {
+
+  .userCard {
     width: 100%;
-    gap: 1.2rem;
-    padding: 1.3rem;
-    align-items: center;
-    box-shadow: 10px 10px 10px 0px rgb(0, 0, 0, 0.1);
+    padding: 14px;
+  }
 
-}
-.profilePicture > img{
-    width: 4.5rem ;
-    border-radius: 50%;
+  .myConnectionsHeading {
+    margin-left: 0;
+    padding-left: 16px;
+  }
 
-}
-.myConnections{
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    cursor: pointer;
-    padding-bottom:1.5rem ;
-
-
-}
-.connectedButton{
-    padding-inline: 0.8rem;
-    padding-block: 0.5rem;
-    background-color: white;
-    color: #007bff;
-    outline: #007bff;
-    border: 1px solid #007bff;
-    border-radius: 10px;
-    cursor: pointer;
-   
+  .myConnections {
+    gap: 20px;
+  }
 }
