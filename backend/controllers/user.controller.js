@@ -299,7 +299,7 @@ export const forgotPassword = async (req, res) => {
     user.resetPasswordExpiry = Date.now() + 15 * 60 * 1000;
     await user.save();
 
-    const resetLink = `http://localhost:3000/ResetPassword/${token}`;
+    const resetLink = `https://pro-connect-om-kottalwars-projects.vercel.app//ResetPassword/${token}`;
 
     await resend.emails.send({
       from: "Support <onboarding@resend.dev>",
