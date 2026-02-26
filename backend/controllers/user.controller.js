@@ -7,30 +7,61 @@ import PDFDocument from "pdfkit"
 import fs from "fs"
 import ConnectionRequest from "../models/conections.model.js";
 import { Resend } from "resend";
+import path from "path";
 const resend = new Resend("re_LrX1mTj8_BuRS7HPVeoEjQNTgCpuDj3L8");
-const convertUserDataToPDF=(userData)=>{
-    const doc=new PDFDocument();
-    const outputPath=crypto.randomBytes(32).toString("hex")+".pdf";
-    const stream=fs.createWriteStream("uploads/" +outputPath);
-    doc.pipe(stream);
-    doc.image(`uploads/${userData.userId.profilePicture}`,{align:"center",width:100})
-    doc.fontSize(14).text(`Name :${userData.userId.name}`);
-    doc.fontSize(14).text(`Username :${userData.userId.username}`);
-    doc.fontSize(14).text(`Email :${userData.userId.email}`);
-    doc.fontSize(14).text(`Bio :${userData.bio}`);
-    doc.fontSize(14).text(`Current Position :${userData.currentPosition}`);
-    doc.fontSize(14).text(`Past Work `);
-    userData.pastWork.forEach((work,index)=>{
-        doc.fontSize(14).text(`Company Name:${work.company}`);
-        doc.fontSize(14).text(`Position:${work.position}`);
-        doc.fontSize(14).text(`Years: ${work.years}`);
+const convertUserDataToPDF = (userData) => {
+  const doc = new PDFDocument({ margin: 50 });
+  const outputPath = crypto.randomBytes(32).toString("hex") + ".pdf";
+  const fullOutputPath = path.join("uploads", outputPath);
 
-    })
-    doc.end();
-    return outputPath;
-   
+  const stream = fs.createWriteStream(fullOutputPath);
+  doc.pipe(stream);
 
-}
+  /* ---------- SAFE IMAGE BLOCK (CRASH-PROOF) ---------- */
+  try {
+    const profilePic = userData?.userId?.profilePicture;
+
+    if (profilePic) {
+      const imagePath = path.join("uploads", profilePic);
+
+      if (fs.existsSync(imagePath)) {
+        doc.image(imagePath, {
+          align: "center",
+          width: 100,
+        });
+        doc.moveDown();
+      }
+    }
+  } catch (err) {
+    console.error("⚠️ PDF image skipped:", err.message);
+    doc.moveDown(); // continue PDF generation
+  }
+
+  /* ---------- TEXT CONTENT (NEVER FAILS) ---------- */
+  doc.fontSize(14).text(`Name: ${userData.userId.name}`);
+  doc.fontSize(14).text(`Username: ${userData.userId.username}`);
+  doc.fontSize(14).text(`Email: ${userData.userId.email}`);
+  doc.moveDown();
+
+  doc.text(`Bio: ${userData.bio || "N/A"}`);
+  doc.text(`Current Position: ${userData.currentPosition || "N/A"}`);
+  doc.moveDown();
+
+  doc.fontSize(16).text("Past Work", { underline: true });
+  doc.moveDown(0.5);
+
+  if (Array.isArray(userData.pastWork)) {
+    userData.pastWork.forEach((work) => {
+      doc.fontSize(14).text(`Company: ${work.company || "N/A"}`);
+      doc.text(`Position: ${work.position || "N/A"}`);
+      doc.text(`Years: ${work.years || "N/A"}`);
+      doc.moveDown();
+    });
+  }
+
+  doc.end();
+  return outputPath;
+};
 
 const register=async (req,res)=>{
     try{
