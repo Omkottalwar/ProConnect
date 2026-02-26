@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-  origin: "https://pro-connect-om-kottalwars-projects.vercel.app/", 
+  origin: "https://pro-connect-om-kottalwars-projects.vercel.app", 
   credentials: true
 }));
 
