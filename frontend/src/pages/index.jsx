@@ -5,12 +5,17 @@ import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import UserLayout from "@/layout/UserLayout";
 const inter=Inter({subsets:["latin"]})
+import Head from "next/head";
+
 
 export default function Home() {
   const router=useRouter();
   return (
-    <UserLayout>
-      <meta name="google-site-verification" content="PQ0RMPeXEJYGOYSWRddbw_7aMUgIu8z4bF_2dvdXEA4" />
+   
+        <Head>
+    <meta name="google-site-verification" content="PQ0RMPeXEJYGOYSWRddbw_7aMUgIu8z4bF_2dvdXEA4" />
+      </Head>
+      <UserLayout>
    
     <div className={styles.container}>
       <div className={styles.mainContainer}>
