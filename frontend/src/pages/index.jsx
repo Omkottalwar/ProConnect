@@ -6,14 +6,11 @@ import { useRouter } from "next/router";
 import UserLayout from "@/layout/UserLayout";
 const inter=Inter({subsets:["latin"]})
 
-
-
 export default function Home() {
   const router=useRouter();
   return (
-    <>
-   
-      <UserLayout>
+    <UserLayout>
+      <meta name="google-site-verification" content="PQ0RMPeXEJYGOYSWRddbw_7aMUgIu8z4bF_2dvdXEA4" />
    
     <div className={styles.container}>
       <div className={styles.mainContainer}>
@@ -35,6 +32,5 @@ export default function Home() {
     </div>
     
     </UserLayout>
-      </>
   );
-} how to write here
+}
