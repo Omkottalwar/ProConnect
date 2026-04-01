@@ -11,6 +11,7 @@ import Head from "next/head";
 export default function Home() {
   const router=useRouter();
   return (
+    <>
    
         <Head>
     <meta name="google-site-verification" content="PQ0RMPeXEJYGOYSWRddbw_7aMUgIu8z4bF_2dvdXEA4" />
@@ -37,5 +38,6 @@ export default function Home() {
     </div>
     
     </UserLayout>
+      </>
   );
 }
