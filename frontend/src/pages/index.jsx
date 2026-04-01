@@ -15,19 +15,7 @@ export default function Home() {
       {/* ✅ META TAGS GO HERE */}
       <Head>
         <title>ProConnect - Connect with Friends</title>
-        <meta
-          name="description"
-          content="A true social media platform with real stories and no bluffs."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {/* Optional SEO / Sharing */}
-        <meta property="og:title" content="ProConnect" />
-        <meta
-          property="og:description"
-          content="Connect with friends without exaggeration."
-        />
-        <meta property="og:image" content="/images/linkedin-network.jpg" />
+        <meta name="google-site-verification" content="PQ0RMPeXEJYGOYSWRddbw_7aMUgIu8z4bF_2dvdXEA4" />
       </Head>
 
       <UserLayout>
