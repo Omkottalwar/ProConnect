@@ -10,6 +10,7 @@ export default function Home() {
   const router=useRouter();
   return (
     <UserLayout>
+      <meta name="google-site-verification" content="PQ0RMPeXEJYGOYSWRddbw_7aMUgIu8z4bF_2dvdXEA4" />
    
     <div className={styles.container}>
       <div className={styles.mainContainer}>
