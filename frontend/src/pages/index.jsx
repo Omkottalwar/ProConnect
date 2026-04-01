@@ -4,33 +4,59 @@ import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import UserLayout from "@/layout/UserLayout";
-const inter=Inter({subsets:["latin"]})
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const router=useRouter();
+  const router = useRouter();
+
   return (
-    <UserLayout>
-      <meta name="google-site-verification" content="PQ0RMPeXEJYGOYSWRddbw_7aMUgIu8z4bF_2dvdXEA4" />
-   
-    <div className={styles.container}>
-      <div className={styles.mainContainer}>
-        <div className={styles.mainContainer__left}>
-          <p>Connnect with Friends without  Exaggeration </p>
-          <p>A True social media platform, with stories no blufs  </p>
-          <div onClick={()=>{
-            router.push("/login")
-          }} className={styles.buttonJoin}
-          > <p>Join Now</p></div>
+    <>
+      {/* ✅ META TAGS GO HERE */}
+      <Head>
+        <title>ProConnect - Connect with Friends</title>
+        <meta
+          name="description"
+          content="A true social media platform with real stories and no bluffs."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {/* Optional SEO / Sharing */}
+        <meta property="og:title" content="ProConnect" />
+        <meta
+          property="og:description"
+          content="Connect with friends without exaggeration."
+        />
+        <meta property="og:image" content="/images/linkedin-network.jpg" />
+      </Head>
+
+      <UserLayout>
+        <div className={styles.container}>
+          <div className={styles.mainContainer}>
+            <div className={styles.mainContainer__left}>
+              <p>Connnect with Friends without Exaggeration</p>
+              <p>A True social media platform, with stories no blufs</p>
+
+              <div
+                onClick={() => {
+                  router.push("/login");
+                }}
+                className={styles.buttonJoin}
+              >
+                <p>Join Now</p>
+              </div>
+            </div>
+
+            <div className={styles.mainContainer__right}>
+              <img
+                style={{ width: "90%" }}
+                src="images/linkedin-network.jpg"
+                alt="/"
+              />
+            </div>
+          </div>
         </div>
-        <div className={styles.mainContainer__right}>
-          <img style={{width:"90%"}} src="images/linkedin-network.jpg" alt="/" />
-
-        </div>
-
-      </div>
-    </div>
-    
-    </UserLayout>
+      </UserLayout>
+    </>
   );
 }
