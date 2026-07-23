@@ -1,0 +1,169 @@
+/* [project]/PRO CONNECT/frontend/src/layout/DashboardLayout/index.module.css [client] (css) */
+.index-module__dpnwCq__homeConatiner {
+  height: 100svh;
+  margin-top: 100px;
+  display: flex;
+}
+
+.index-module__dpnwCq__homeContainer__leftBar {
+  background-color: #fff;
+  border-right: 1px solid #dedede;
+  flex-direction: column;
+  flex: .2;
+  align-items: flex-start;
+  gap: 1.2rem;
+  width: 250px;
+  height: 100svh;
+  display: flex;
+  position: fixed;
+  left: 5px;
+  overflow: auto;
+}
+
+.index-module__dpnwCq__sideBarOption {
+  cursor: pointer;
+  align-items: center;
+  gap: 1.3rem;
+  width: 80%;
+  max-width: 80%;
+  margin: 0 auto;
+  font-size: 1.4rem;
+  transition: all .2s;
+  display: flex;
+}
+
+.index-module__dpnwCq__sideBarOption:hover {
+  transform: scale(1.04);
+}
+
+.index-module__dpnwCq__sideBarOption > svg {
+  min-width: fit-content;
+  height: 1.4em;
+}
+
+.index-module__dpnwCq__homecontainer__extraConatiner {
+  border-left: 1px solid #dedede;
+  flex: .2;
+  width: 250px;
+  height: 100svh;
+  padding-left: 1.2rem;
+  position: fixed;
+  right: 100px;
+}
+
+.index-module__dpnwCq__homeContainer__feedConatiner {
+  flex: .6;
+  height: 100svh;
+  margin-left: 250px;
+  padding-inline: .8rem;
+}
+
+.index-module__dpnwCq__mobileNavBar {
+  background: #fff;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 8vh;
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.index-module__dpnwCq__mobileNavBar svg {
+  cursor: pointer;
+  width: 2.2em;
+  height: 2.2em;
+}
+
+@media only screen and (max-width: 600px) {
+  .index-module__dpnwCq__homecontainer__extraConatiner {
+    display: none;
+  }
+
+  .index-module__dpnwCq__homeConatiner {
+    display: block;
+  }
+
+  .index-module__dpnwCq__homeContainer__leftBar {
+    display: none;
+  }
+
+  .index-module__dpnwCq__mobileNavBar {
+    display: flex;
+  }
+
+  .index-module__dpnwCq__homeContainer__feedConatiner {
+    flex: 1;
+    margin-top: 120px;
+    margin-left: 0;
+    padding-bottom: 1560px;
+  }
+}
+
+/* [project]/PRO CONNECT/frontend/src/Components/Navbar/styles.module.css [client] (css) */
+.styles-module__4AJ-VG__container {
+  background-color: #fff;
+  width: 100%;
+  padding: 1.2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.styles-module__4AJ-VG__navBar {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.styles-module__4AJ-VG__navBarOptionContainer {
+  display: flex;
+}
+
+.styles-module__4AJ-VG__buttonJoin {
+  color: #fff;
+  cursor: pointer;
+  background: #cd8987;
+  border-radius: 10px;
+  padding-block: .6rem;
+  padding-inline: 1.2rem;
+  font-size: .7rem;
+  font-weight: bold;
+}
+
+/* [project]/PRO CONNECT/frontend/src/pages/my_connections/styles.module.css [client] (css) */
+.styles-module__U6F6Ma__userCard {
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  padding: 1.3rem;
+  display: flex;
+  box-shadow: 10px 10px 10px #0000001a;
+}
+
+.styles-module__U6F6Ma__profilePicture > img {
+  border-radius: 50%;
+  width: 4.5rem;
+}
+
+.styles-module__U6F6Ma__myConnections {
+  cursor: pointer;
+  justify-content: space-around;
+  width: 100%;
+  padding-bottom: 1.5rem;
+  display: flex;
+}
+
+.styles-module__U6F6Ma__connectedButton {
+  color: #007bff;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 10px;
+  outline: #007bff;
+  padding-block: .5rem;
+  padding-inline: .8rem;
+}
+
+/*# sourceMappingURL=PRO%20CONNECT_frontend_src_fc962e13._.css.map*/

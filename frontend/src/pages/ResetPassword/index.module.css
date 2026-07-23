@@ -1,0 +1,79 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #00488b, #00488b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 380px;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  animation: fadeUp 0.5s ease;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input {
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input:focus {
+  border-color: #00488b;
+  box-shadow: 0 0 0 2px rgba(147, 51, 234, 0.3);
+}
+
+.button {
+  padding: 0.75rem;
+  background: #00488b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #00488b;
+}
+
+.message {
+  margin-top: 1rem;
+  text-align: center;
+  color: #047857;
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.messageError {
+  margin-top: 1rem;
+  text-align: center;
+  color: #dc2626;
+}

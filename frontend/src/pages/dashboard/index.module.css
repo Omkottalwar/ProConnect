@@ -1,0 +1,598 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.createPostCard {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.createPostTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.userProfile {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.userProfilePlaceholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.textAreaOfContent {
+  width: 100%;
+  min-height: 80px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--text-main);
+  outline: none;
+  resize: vertical;
+  line-height: 1.5;
+  transition: all 0.2s ease;
+}
+
+.textAreaOfContent:focus {
+  background: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 30, 61, 0.08);
+}
+
+.fileSelectedBadge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: var(--accent-gold-bg);
+  border: 1px solid rgba(201, 169, 97, 0.4);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.fileSelectedBadge button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.createPostBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 14px;
+}
+
+.attachFileBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.attachFileBtn:hover {
+  background: var(--bg-input);
+  color: var(--primary);
+}
+
+.attachFileBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.uploadButton {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-glow);
+  transition: all 0.2s ease;
+}
+
+.uploadButton:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.postCommentBtn:hover {
+  background: var(--primary-light);
+}
+
+/* Share Modal Styling */
+.shareModalContent {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.sharePreviewCard {
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--text-body);
+  max-height: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.shareGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.shareOptionBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: #ffffff;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shareOptionBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.shareWhatsapp {
+  border-color: rgba(37, 211, 102, 0.4);
+  color: #128C7E;
+}
+
+.shareWhatsapp:hover {
+  background: rgba(37, 211, 102, 0.08);
+}
+
+.shareInstagram {
+  border-color: rgba(225, 48, 108, 0.4);
+  color: #C13584;
+}
+
+.shareInstagram:hover {
+  background: rgba(225, 48, 108, 0.08);
+}
+
+.shareTwitter {
+  border-color: rgba(15, 20, 25, 0.3);
+  color: #0F1419;
+}
+
+.shareTwitter:hover {
+  background: rgba(15, 20, 25, 0.06);
+}
+
+.shareLinkedin {
+  border-color: rgba(10, 102, 194, 0.4);
+  color: #0A66C2;
+}
+
+.shareLinkedin:hover {
+  background: rgba(10, 102, 194, 0.08);
+}
+
+.copyLinkRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.copyLinkInput {
+  flex: 1;
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--text-dim);
+  outline: none;
+}
+
+.copyLinkBtn {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.copyLinkBtn:hover {
+  background: var(--primary-light);
+}
+
+/* Posts Feed & Single Cards */
+.postFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.singleCard {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.singleCard:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #d8ceb5;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authorAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.authorAvatarPlaceholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.authorName:hover {
+  color: var(--primary-hover);
+}
+
+.authorHandle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.deletePostBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.deletePostBtn:hover {
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+}
+
+.deletePostBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.postBody {
+  font-size: 14px;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.postMediaWrapper {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.postMedia {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Actions Bar */
+.optionsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+}
+
+.actionBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionBtn:hover {
+  background: var(--bg-input);
+  color: var(--primary);
+}
+
+.likedActionBtn {
+  color: var(--color-danger) !important;
+  background: var(--color-danger-bg) !important;
+}
+
+.likedActionBtn svg {
+  color: var(--color-danger) !important;
+  fill: var(--color-danger) !important;
+}
+
+.actionBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Modal */
+.commentsContainer {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 30, 61, 0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.allCommentsContainer {
+  width: 100%;
+  max-width: 520px;
+  max-height: 80vh;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 12px;
+}
+
+.modalHeader h3 {
+  font-family: var(--font-subheading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.modalHeader button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.commentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 4px;
+}
+
+.noComments {
+  padding: 30px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.singleComment {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+}
+
+.commentAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.commentAvatarPlaceholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.commentContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.commentAuthorRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.commentAuthorName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.commentAuthorHandle {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.commentBodyText {
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.postCommentContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+}
+
+.postCommentContainer input {
+  flex: 1;
+  padding: 10px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+}
+
+.postCommentContainer input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+}
+
+.postCommentBtn {
+  padding: 9px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}

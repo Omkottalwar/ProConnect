@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Outfit:wght@400;500;600;700&display=swap');
+
+/* ==============================================
+   PROCONNECT EDITORIAL NAVY, BEIGE & WHITE DESIGN SYSTEM
+   ============================================== */
+
+:root {
+  /* Fonts */
+  --font-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Playfair Display', 'Outfit', Georgia, serif;
+  --font-subheading: 'Outfit', 'Inter', sans-serif;
+
+  /* Exclusive Navy, Beige & White Palette */
+  --bg-dark: #faf6ed;         /* Warm Beige Page Canvas */
+  --bg-section: #f5f0e6;      /* Slightly deeper beige section background */
+  --bg-card: #ffffff;         /* Pure Off-White Card Surface */
+  --bg-card-hover: #fdfcfa;   /* Hover state */
+  --bg-input: #f5f0e6;        /* Warm Beige Input field */
+  --bg-glass: rgba(250, 246, 237, 0.95);
+
+  --border-subtle: #e8dfc8;   /* Soft warm beige-toned border */
+  --border-focus: #0f1e3d;    /* Deep navy focus ring */
+
+  /* Primary Brand (Navy Authority) */
+  --primary: #0f1e3d;         /* Deep Navy Primary */
+  --primary-hover: #1e3a5f;   /* Navy Accent Hover */
+  --primary-light: #2c4a6e;
+  --primary-gradient: linear-gradient(135deg, #0f1e3d 0%, #1e3a5f 100%);
+  --primary-glow: rgba(15, 30, 61, 0.12);
+
+  /* Muted Gold & Accents */
+  --accent-gold: #c9a961;     /* Muted Gold Accent */
+  --accent-gold-hover: #b8935f;
+  --accent-gold-bg: #f7f2e4;
+
+  /* Soft Editorial Status Colors */
+  --color-success: #4a7c59;
+  --color-success-bg: #e8f0e9;
+  --color-warning: #b8863d;
+  --color-warning-bg: #f5ebd8;
+  --color-danger: #b04a4a;
+  --color-danger-bg: #f5e6e6;
+
+  /* High-Contrast Editorial Typography */
+  --text-main: #1a1a1a;       /* Deep Charcoal Body Text */
+  --text-heading: #0f1e3d;    /* Deep Navy Headings */
+  --text-muted: #6b6b6b;      /* Muted Secondary Text */
+  --text-dim: #949494;        /* Light Secondary Text */
+
+  /* Spacing Grid (4px/8px Base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* Radii & Warm Navy-Tinted Shadows */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(15, 30, 61, 0.04);
+  --shadow-md: 0 8px 20px rgba(15, 30, 61, 0.07);
+  --shadow-lg: 0 16px 32px rgba(15, 30, 61, 0.1);
+  --shadow-glow: 0 4px 14px rgba(15, 30, 61, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d8ceb5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c2b498;
+}
+
+/* Base interactive transitions */
+a, button, input, textarea {
+  font-family: inherit;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Warm Beige Skeleton Shimmer Animation */
+@keyframes skeletonShimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e8dfc8 0px, #faf6ed 50%, #e8dfc8 100%);
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}

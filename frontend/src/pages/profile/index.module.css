@@ -1,0 +1,413 @@
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.coverBanner {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, #0f1e3d 0%, #1e3a5f 50%, #2c4a6e 100%);
+  border-radius: 24px;
+  position: relative;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 50px;
+}
+
+.avatarWrapper {
+  position: absolute;
+  bottom: -45px;
+  left: 32px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.avatarOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 30, 61, 0.6);
+  backdrop-filter: blur(4px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.avatarWrapper:hover .avatarOverlay {
+  opacity: 1;
+}
+
+.avatarOverlay svg {
+  width: 24px;
+  height: 24px;
+}
+
+.profileHeaderCard {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.headerTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nameInput {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  padding: 2px 6px;
+  margin-left: -6px;
+}
+
+.nameInput.editable {
+  background: var(--bg-input);
+  border-color: var(--primary);
+}
+
+.usernameHandle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.editProfileBtn {
+  padding: 9px 22px;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-glow);
+}
+
+.editProfileBtn:hover {
+  background: var(--primary-hover);
+}
+
+.saveActive {
+  background: var(--accent-gold) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-gold) !important;
+}
+
+/* Stats Row */
+.statsRow {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.statCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statVal {
+  font-family: var(--font-subheading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.statLbl {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Tab Nav */
+.tabNav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tabBtn {
+  padding: 8px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tabBtn:hover {
+  color: var(--primary);
+}
+
+.activeTab {
+  color: var(--primary) !important;
+  border-bottom-color: var(--primary) !important;
+}
+
+.tabContentArea {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emptyTabState {
+  padding: 40px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.postsTabList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profilePostCard {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.postText {
+  font-size: 14px;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.postMediaImage {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-top: 12px;
+}
+
+.workTabSection, .aboutTabCard {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.workHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.workHeaderRow h4, .aboutTabCard h4 {
+  font-family: var(--font-subheading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.addWorkBtn {
+  background: var(--accent-gold-bg);
+  border: 1px solid rgba(201, 169, 97, 0.4);
+  color: var(--primary);
+  padding: 6px 16px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.workGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.workCardItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+}
+
+.workIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-gold-bg);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.workCardItem h5 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.companyName {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.workYears {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.bioTextArea {
+  width: 100%;
+  min-height: 100px;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 14px;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+}
+
+.bioTextArea:disabled {
+  color: var(--text-muted);
+}
+
+.bioTextArea:not(:disabled) {
+  background: var(--bg-input);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 30, 61, 0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modalHeader h3 {
+  font-family: var(--font-subheading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.modalHeader button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  color: var(--text-main);
+  font-size: 14px;
+  outline: none;
+}
+
+.modalInput:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+}
+
+.modalSubmitBtn {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}

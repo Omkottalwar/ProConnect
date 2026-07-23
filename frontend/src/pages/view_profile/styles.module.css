@@ -1,0 +1,246 @@
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.loadingState {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.coverBanner {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, #0f1e3d 0%, #1e3a5f 50%, #2c4a6e 100%);
+  border-radius: 24px;
+  position: relative;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 50px;
+}
+
+.avatarWrapper {
+  position: absolute;
+  bottom: -45px;
+  left: 32px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+/* Grid Layout */
+.mainGrid {
+  display: flex;
+  gap: 24px;
+}
+
+.leftCol {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rightCol {
+  flex: 0.8;
+}
+
+.profileHeaderBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.userName {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.userHandle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.connectBtn {
+  padding: 9px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-glow);
+}
+
+.connectBtn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.connectedBtn {
+  padding: 9px 18px;
+  background: var(--color-success-bg);
+  border: 1px solid #c3e2cb;
+  color: var(--color-success);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.resumeBtn {
+  padding: 9px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--primary);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.resumeBtn:hover {
+  background: #e8dfc8;
+}
+
+.bioCard, .workCard, .activityCard {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.bioCard h4, .workCard h4, .activityCard h4 {
+  font-family: var(--font-subheading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.bioCard p {
+  font-size: 14px;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.workList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.workItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+}
+
+.workIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--accent-gold-bg);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.workItem h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.companyName {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.duration {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.noWork, .noActivity {
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 10px 0;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.activityItem {
+  padding: 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  font-size: 13px;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.activityMedia {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .mainGrid {
+    flex-direction: column;
+  }
+}

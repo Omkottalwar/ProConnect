@@ -1,0 +1,58 @@
+.skeletonPostCard {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.skeletonHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skeletonAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.skeletonMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.skeletonLine {
+  height: 14px;
+  border-radius: 4px;
+}
+
+.titleLine {
+  width: 40%;
+}
+
+.subtitleLine {
+  width: 25%;
+}
+
+.contentLine {
+  width: 100%;
+  height: 14px;
+}
+
+.shortLine {
+  width: 70%;
+  height: 14px;
+}
+
+.skeletonMedia {
+  width: 100%;
+  height: 200px;
+  border-radius: 14px;
+}
