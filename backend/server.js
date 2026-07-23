@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(cors({
-  origin: ["http://localhost:3000", "https://pro-connect-om-kottalwars-projects.vercel.app"], 
+  origin: ["http://localhost:3000", "https://pro-connect-17.vercel.app", "https://pro-connect-17.vercel.app/"], 
   credentials: true
 }));
 
